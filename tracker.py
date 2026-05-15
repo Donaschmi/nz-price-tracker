@@ -136,6 +136,7 @@ def run():
 
     # ── Scrape ──────────────────────────────────────────────────────────────
     failed_retailers = set()
+    ok_retailers = set()
     total = 0
     for item in ITEMS:
         for retailer_key, query in item.get("retailers", {}).items():
@@ -144,7 +145,9 @@ def run():
                 continue
             log.info("[%s] %s → %r", item["id"], retailer_key, query)
             results = scraper.safe_search(query, max_results=MAX_RESULTS)
-            if not results:
+            if results:
+                ok_retailers.add(retailer_key)
+            else:
                 failed_retailers.add(retailer_key)
             for r in results:
                 db.record_price(
@@ -197,7 +200,9 @@ def run():
 
     # ── Write report ─────────────────────────────────────────────────────────
     run_date = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
-    scrape_errors = [RETAILER_NAMES.get(k, k) for k in sorted(failed_retailers)]
+    # Only flag retailers that returned zero results across ALL their queries
+    truly_blocked = failed_retailers - ok_retailers
+    scrape_errors = [RETAILER_NAMES.get(k, k) for k in sorted(truly_blocked)]
     md = build_markdown(all_prices, deals, run_date, scrape_errors)
     with open("latest_report.md", "w") as f:
         f.write(md)

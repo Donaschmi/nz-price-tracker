@@ -17,7 +17,7 @@ python tracker.py
 # Commit and push results if anything changed
 git add latest_report.md prices.db
 if ! git diff --staged --quiet; then
-    git commit -m "chore: price snapshot $(date +%Y-%m-%d)"
+    git -c commit.gpgsign=false commit -m "chore: price snapshot $(date +%Y-%m-%d)"
     git push origin main
     echo "✅ Report pushed to GitHub."
 else
