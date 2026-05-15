@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  macOS launchd scheduler for the NZ price tracker.
+
+  SETUP (run these once in Terminal):
+    1. Edit the two REPLACE_WITH_REPO_PATH placeholders below to your actual clone path,
+       e.g. /Users/schmitzd/nz-price-tracker
+    2. cp com.nz-price-tracker.plist ~/Library/LaunchAgents/
+    3. launchctl load ~/Library/LaunchAgents/com.nz-price-tracker.plist
+
+  To run immediately:
+    launchctl start com.nz-price-tracker
+
+  To unload / stop scheduling:
+    launchctl unload ~/Library/LaunchAgents/com.nz-price-tracker.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.nz-price-tracker</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>REPLACE_WITH_REPO_PATH/run_daily.sh</string>
+    </array>
+
+    <!-- Runs every day at 08:00 local time -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- If the Mac was asleep at 08:00, run as soon as it wakes -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>REPLACE_WITH_REPO_PATH/tracker.log</string>
+    <key>StandardErrorPath</key>
+    <string>REPLACE_WITH_REPO_PATH/tracker.log</string>
+</dict>
+</plist>
