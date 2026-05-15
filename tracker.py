@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """Daily price tracker for NZ van life packing list.
+Writes latest_report.md to the repo — no email needed.
 Run manually or via GitHub Actions (see .github/workflows/daily.yml).
 """
 import logging
 import sys
-from datetime import date
+from datetime import date, datetime
 
-import config
 from database import Database
-from items import ITEMS
-from notifier import build_html_report, send_email
+from items import ITEMS, RETAILER_NAMES
 from scrapers import ALL_SCRAPERS
 
 logging.basicConfig(
@@ -19,12 +18,19 @@ logging.basicConfig(
 )
 log = logging.getLogger("tracker")
 
-GOOD_DEAL_PCT  = config.GOOD_DEAL_PCT
-GREAT_DEAL_PCT = config.GREAT_DEAL_PCT
-MAX_RESULTS    = config.MAX_RESULTS_PER_RETAILER
+GOOD_DEAL_PCT  = 15.0
+GREAT_DEAL_PCT = 25.0
+MAX_RESULTS    = 3
+
+PRIORITY_LABEL = {"critical": "🔴", "high": "🟡", "normal": "⚪"}
+DEAL_LABEL     = {
+    "all_time_low": "🏆 All-time low",
+    "great":        "🔥 Great deal (≥25% off avg)",
+    "good":         "💚 Good deal (≥15% off avg)",
+}
 
 
-def classify_deal(price: float, stats: dict | None, all_time_low: float | None) -> str | None:
+def classify_deal(price, stats, all_time_low):
     if all_time_low and price <= all_time_low:
         return "all_time_low"
     if stats and stats["count"] >= 3:
@@ -33,26 +39,113 @@ def classify_deal(price: float, stats: dict | None, all_time_low: float | None) 
             return "great"
         if disc >= GOOD_DEAL_PCT:
             return "good"
-        if disc >= 8:
-            return "watch"
     return None
 
 
+def build_markdown(all_prices, deals, run_date, scrape_errors):
+    lines = []
+    lines.append(f"# 🇳🇿 NZ Van Life — Price Report")
+    lines.append(f"*Last updated: {run_date} UTC · "
+                 f"Retailers: Decathlon.be · Amazon.de · Wiggle.com · Zalando.be · Bol.com*")
+    lines.append("")
+    lines.append("🔴 Must-have · 🟡 Recommended · ⚪ Nice to have")
+    lines.append("")
+
+    # Scrape errors notice
+    if scrape_errors:
+        lines.append("> ⚠️ **Blocked retailers today:** " + ", ".join(scrape_errors) +
+                     " — cloud IPs are sometimes rate-limited. Results below are from accessible retailers only.")
+        lines.append("")
+
+    # Deals section
+    if deals:
+        lines.append(f"## 🎯 Today's deals ({len(deals)} found)")
+        lines.append("")
+        lines.append("| Item | Retailer | Price | Deal | Link |")
+        lines.append("|------|----------|------:|------|------|")
+        for d in deals:
+            shop = RETAILER_NAMES.get(d["retailer"], d["retailer"])
+            label = DEAL_LABEL.get(d["deal_type"], "")
+            name = d["item_meta"]["name"]
+            lines.append(f"| {name} | {shop} | €{d['price']:.2f} | {label} | [→]({d['url']}) |")
+        lines.append("")
+    else:
+        lines.append("## 🎯 Today's deals")
+        lines.append("*No significant discounts today — prices are near their recent averages.*")
+        lines.append("")
+
+    # Full price table grouped by category
+    lines.append("## 📋 All tracked items")
+    lines.append("")
+    lines.append("*Cheapest result per item across all retailers. "
+                 "Discount shown vs 30-day rolling average once ≥3 data points exist.*")
+    lines.append("")
+
+    current_cat = None
+    for item in ITEMS:
+        rows = all_prices.get(item["id"], [])
+        cat = item["category"]
+        if cat != current_cat:
+            if current_cat is not None:
+                lines.append("")
+            lines.append(f"### {cat}")
+            lines.append("")
+            lines.append("| | Item | Best price | Retailer | vs avg | Link |")
+            lines.append("|--|------|----------:|----------|--------|------|")
+            current_cat = cat
+
+        pri = PRIORITY_LABEL.get(item["priority"], "⚪")
+
+        if not rows:
+            lines.append(f"| {pri} | {item['name']} | *no results* | — | — | — |")
+            continue
+
+        best = rows[0]
+        shop = RETAILER_NAMES.get(best["retailer"], best["retailer"])
+        stats = best.get("stats")
+        disc_str = "—"
+        if stats and stats["count"] >= 3:
+            disc = (stats["avg"] - best["price"]) / stats["avg"] * 100
+            sign = "▼" if disc > 0 else "▲"
+            disc_str = f"{sign}{abs(disc):.0f}%"
+
+        deal_icon = ""
+        if best.get("deal_type") == "all_time_low":
+            deal_icon = " 🏆"
+        elif best.get("deal_type") == "great":
+            deal_icon = " 🔥"
+        elif best.get("deal_type") == "good":
+            deal_icon = " 💚"
+
+        url = best.get("url", "")
+        link = f"[→]({url})" if url else "—"
+        lines.append(
+            f"| {pri} | {item['name']} | **€{best['price']:.2f}**{deal_icon} "
+            f"| {shop} | {disc_str} | {link} |"
+        )
+
+    lines.append("")
+    lines.append("---")
+    lines.append(f"*Generated {run_date} UTC. Prices are indicative — verify before purchasing.*")
+    return "\n".join(lines)
+
+
 def run():
-    db = Database(config.DB_PATH)
+    db = Database("prices.db")
     db.init()
 
     # ── Scrape ──────────────────────────────────────────────────────────────
-    total_scraped = 0
+    scrape_errors = []
+    total = 0
     for item in ITEMS:
-        retailers = item.get("retailers", {})
-        for retailer_key, query in retailers.items():
+        for retailer_key, query in item.get("retailers", {}).items():
             scraper = ALL_SCRAPERS.get(retailer_key)
             if not scraper:
-                log.warning("No scraper registered for %r", retailer_key)
                 continue
             log.info("[%s] %s → %r", item["id"], retailer_key, query)
             results = scraper.safe_search(query, max_results=MAX_RESULTS)
+            if not results and retailer_key not in scrape_errors:
+                scrape_errors.append(RETAILER_NAMES.get(retailer_key, retailer_key))
             for r in results:
                 db.record_price(
                     item_id=item["id"],
@@ -63,13 +156,13 @@ def run():
                     currency=r.get("currency", "EUR"),
                     in_stock=r.get("in_stock", True),
                 )
-                total_scraped += 1
+                total += 1
 
-    log.info("Scraped %d prices", total_scraped)
+    log.info("Scraped %d prices", total)
 
-    # ── Analyse & build report data ─────────────────────────────────────────
-    all_prices: dict = {}   # item_id → list of enriched rows
-    deals: list     = []
+    # ── Analyse ─────────────────────────────────────────────────────────────
+    all_prices = {}
+    deals = []
 
     for item in ITEMS:
         latest = db.get_latest_prices(item["id"])
@@ -79,59 +172,35 @@ def run():
 
         enriched = []
         for row in latest:
-            stats       = db.get_stats(item["id"], row["retailer"])
-            atl         = db.get_all_time_low(item["id"], row["retailer"])
-            deal_type   = classify_deal(row["price"], stats, atl)
-            disc_pct    = 0.0
+            stats     = db.get_stats(item["id"], row["retailer"])
+            atl       = db.get_all_time_low(item["id"], row["retailer"])
+            deal_type = classify_deal(row["price"], stats, atl)
+            disc_pct  = 0.0
             if stats and stats["count"] >= 3:
                 disc_pct = (stats["avg"] - row["price"]) / stats["avg"] * 100
-
-            enriched_row = {
-                **row,
-                "item_meta":    item,
-                "stats":        stats,
-                "deal_type":    deal_type,
-                "discount_pct": disc_pct,
-            }
-            enriched.append(enriched_row)
-
+            enriched.append({**row, "item_meta": item, "stats": stats,
+                              "deal_type": deal_type, "discount_pct": disc_pct})
             if deal_type in ("all_time_low", "great", "good"):
-                deals.append(enriched_row)
+                deals.append(enriched[-1])
 
-        # Keep only cheapest per retailer for the full table
-        best_per_retailer: dict[str, dict] = {}
+        best_per_retailer = {}
         for row in enriched:
-            key = row["retailer"]
-            if key not in best_per_retailer or row["price"] < best_per_retailer[key]["price"]:
-                best_per_retailer[key] = row
+            k = row["retailer"]
+            if k not in best_per_retailer or row["price"] < best_per_retailer[k]["price"]:
+                best_per_retailer[k] = row
         all_prices[item["id"]] = sorted(best_per_retailer.values(), key=lambda x: x["price"])
 
-    # Sort deals: all_time_low first, then by discount %
-    deals.sort(key=lambda x: (-{"all_time_low": 3, "great": 2, "good": 1}.get(x["deal_type"], 0),
-                               -x["discount_pct"]))
+    deals.sort(key=lambda x: (
+        -{"all_time_low": 3, "great": 2, "good": 1}.get(x["deal_type"], 0),
+        -x["discount_pct"],
+    ))
 
-    # ── Email ───────────────────────────────────────────────────────────────
-    run_date   = date.today().strftime("%B %-d, %Y")
-    deal_count = len(deals)
-    subject    = (
-        f"🇳🇿 NZ Packing — {deal_count} deal{'s' if deal_count != 1 else ''} found today · {run_date}"
-        if deal_count else
-        f"🇳🇿 NZ Packing — Daily price update · {run_date}"
-    )
-
-    html = build_html_report(deals=deals, all_prices=all_prices, run_date=run_date)
-
-    send_email(
-        html_body=html,
-        subject=subject,
-        email_from=config.EMAIL_FROM,
-        email_to=config.EMAIL_TO,
-        smtp_host=config.SMTP_HOST,
-        smtp_port=config.SMTP_PORT,
-        smtp_password=config.SMTP_PASSWORD,
-    )
-
-    log.info("Done. %d deals found today.", deal_count)
+    # ── Write report ─────────────────────────────────────────────────────────
+    run_date = datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+    md = build_markdown(all_prices, deals, run_date, scrape_errors)
+    with open("latest_report.md", "w") as f:
+        f.write(md)
+    log.info("Report written to latest_report.md (%d deals)", len(deals))
     return 0
 
 
