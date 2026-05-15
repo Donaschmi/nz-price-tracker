@@ -14,8 +14,8 @@ class AmazonScraper(BaseScraper):
     def search(self, query: str, max_results: int = 3) -> list[dict]:
         resp = self._get(
             SEARCH_URL,
-            params={"k": query, "language": "en_GB"},
-            extra_headers={"Accept-Language": "en-GB,en;q=0.9"},
+            params={"k": query},
+            extra_headers={"Accept-Language": "en-GB,en;q=0.9,de;q=0.8"},
         )
         soup = BeautifulSoup(resp.text, "html.parser")
         results = []

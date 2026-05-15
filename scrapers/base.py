@@ -29,7 +29,7 @@ class BaseScraper(ABC):
             self._session.headers.update(BROWSER_HEADERS)
         return self._session
 
-    def _get(self, url: str, *, params=None, extra_headers=None, timeout=20) -> requests.Response:
+    def _get(self, url: str, *, params=None, extra_headers=None, timeout=12) -> requests.Response:
         session = self._get_session()
         headers = {**BROWSER_HEADERS, **(extra_headers or {})}
         time.sleep(random.uniform(1.5, 3.5))
