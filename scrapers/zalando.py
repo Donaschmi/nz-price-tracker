@@ -6,7 +6,7 @@ from .base import BaseScraper
 
 log = logging.getLogger(__name__)
 
-SEARCH_URL = "https://www.zalando.be/catalog/"
+SEARCH_URL = "https://fr.zalando.be/catalogue/"
 
 
 class ZalandoScraper(BaseScraper):
@@ -16,7 +16,7 @@ class ZalandoScraper(BaseScraper):
         resp = self._get(
             SEARCH_URL,
             params={"q": query},
-            extra_headers={"Accept-Language": "en-BE,en;q=0.9"},
+            extra_headers={"Accept-Language": "fr-BE,fr;q=0.9,en;q=0.8"},
         )
         soup = BeautifulSoup(resp.text, "html.parser")
         results = []
@@ -25,7 +25,6 @@ class ZalandoScraper(BaseScraper):
         for tag in soup.find_all("script", type="application/json"):
             try:
                 data = json.loads(tag.string or "")
-                # Look for a list that contains objects with priceRange/displayName
                 articles = None
                 if isinstance(data, dict):
                     articles = (
@@ -36,7 +35,6 @@ class ZalandoScraper(BaseScraper):
                 if not articles:
                     continue
 
-                # Normalise: sometimes it's a dict of {sku: {...}}
                 items = articles.values() if isinstance(articles, dict) else articles
                 for item in list(items)[:max_results * 3]:
                     if not isinstance(item, dict):
@@ -51,7 +49,7 @@ class ZalandoScraper(BaseScraper):
                         "name":     str(name)[:120],
                         "price":    float(price),
                         "currency": "EUR",
-                        "url":      url if url.startswith("http") else "https://www.zalando.be" + url,
+                        "url":      url if url.startswith("http") else "https://fr.zalando.be" + url,
                         "in_stock": True,
                     })
                     if len(results) >= max_results:
@@ -76,7 +74,7 @@ class ZalandoScraper(BaseScraper):
                     "name":     name_el.get_text(strip=True)[:120],
                     "price":    price,
                     "currency": "EUR",
-                    "url":      href if href.startswith("http") else "https://www.zalando.be" + href,
+                    "url":      href if href.startswith("http") else "https://fr.zalando.be" + href,
                     "in_stock": True,
                 })
                 if len(results) >= max_results:
