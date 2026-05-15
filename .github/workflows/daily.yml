@@ -1,0 +1,49 @@
+name: Daily Price Tracker
+
+on:
+  schedule:
+    # 07:00 Brussels time = 05:00 UTC (winter) / 06:00 UTC (summer).
+    # We pick 06:00 UTC to land in your morning inbox regardless of DST.
+    - cron: "0 6 * * *"
+  workflow_dispatch:   # also runnable manually from the Actions tab
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit prices.db back to the repo
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tracker
+        env:
+          EMAIL_FROM:     ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO:       ${{ secrets.EMAIL_TO }}
+          SMTP_PASSWORD:  ${{ secrets.SMTP_PASSWORD }}
+          # Optional overrides (set as repo secrets/vars if needed):
+          # SMTP_HOST:    smtp.gmail.com
+          # SMTP_PORT:    587
+          # GOOD_DEAL_PCT:  15
+          # GREAT_DEAL_PCT: 25
+        run: python tracker.py
+
+      - name: Commit updated price database
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add prices.db
+          git diff --staged --quiet || git commit -m "chore: price snapshot $(date -u +%Y-%m-%d)"
+          git push
