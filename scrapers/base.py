@@ -1,39 +1,37 @@
 import logging
 import time
 import random
-import requests
 from abc import ABC, abstractmethod
+from curl_cffi import requests
 
 log = logging.getLogger(__name__)
 
 BROWSER_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Accept-Language": "en-US,en;q=0.9",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept":          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate, br",
-    "Connection": "keep-alive",
+    "Connection":      "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "Sec-Fetch-Dest":  "document",
+    "Sec-Fetch-Mode":  "navigate",
+    "Sec-Fetch-Site":  "none",
+    "Sec-Fetch-User":  "?1",
+    "Cache-Control":   "max-age=0",
 }
 
 
 class BaseScraper(ABC):
     name: str = ""
-    _session: requests.Session | None = None
 
-    def _get_session(self) -> requests.Session:
-        if self._session is None:
-            self._session = requests.Session()
-            self._session.headers.update(BROWSER_HEADERS)
-        return self._session
-
-    def _get(self, url: str, *, params=None, extra_headers=None, timeout=12) -> requests.Response:
-        session = self._get_session()
+    def _get(self, url: str, *, params=None, extra_headers=None, timeout=12):
         headers = {**BROWSER_HEADERS, **(extra_headers or {})}
-        time.sleep(random.uniform(1.5, 3.5))
-        resp = session.get(url, params=params, headers=headers, timeout=timeout)
+        time.sleep(random.uniform(1.5, 3.0))
+        resp = requests.get(
+            url,
+            params=params,
+            headers=headers,
+            timeout=timeout,
+            impersonate="chrome124",  # Spoofs Chrome 124 TLS fingerprint
+        )
         resp.raise_for_status()
         return resp
 

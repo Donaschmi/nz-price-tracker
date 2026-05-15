@@ -6,14 +6,14 @@ from .base import BaseScraper
 
 log = logging.getLogger(__name__)
 
-SEARCH_URL = "https://www.wiggle.com/search"
+SEARCH_URL = "https://www.wiggle.com/searchresults"
 
 
 class WiggleScraper(BaseScraper):
     name = "wiggle"
 
     def search(self, query: str, max_results: int = 3) -> list[dict]:
-        resp = self._get(SEARCH_URL, params={"q": query})
+        resp = self._get(SEARCH_URL, params={"descriptionfilter": query})
         soup = BeautifulSoup(resp.text, "html.parser")
         results = []
 
