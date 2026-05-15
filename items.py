@@ -1,9 +1,5 @@
 # Trackable items extracted from the NZ Van Life Packing Checklist.
 # Excludes: Documents & Admin (can't buy online), Van Equipment (buy in Auckland).
-#
-# Retailers:
-#   idealo   → Idealo.be  (aggregates Decathlon, Bol, Amazon.de, Zalando, etc.)
-#   amazon   → Amazon.de  (direct fallback for branded electronics)
 
 ITEMS = [
     # ── CLOTHING ────────────────────────────────────────────────────────────
@@ -13,8 +9,10 @@ ITEMS = [
         "note": "Icebreaker, Macpac, or Kathmandu",
         "priority": "critical", "category": "Clothing", "qty": 3,
         "retailers": {
-            "idealo":   "Icebreaker merino t-shirt",
-            "amazon":   "Icebreaker merino wool t-shirt men",
+            "decathlon": "merino t-shirt",
+            "amazon":    "Icebreaker merino wool t-shirt",
+            "wiggle":    "Icebreaker merino t-shirt",
+            "zalando":   "Icebreaker merino shirt",
         },
     },
     {
@@ -23,8 +21,10 @@ ITEMS = [
         "note": "Base layer + mid-layer",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "idealo":   "Icebreaker merino long sleeve top",
-            "amazon":   "Icebreaker merino long sleeve base layer",
+            "decathlon": "merino long sleeve top",
+            "amazon":    "Icebreaker merino long sleeve",
+            "wiggle":    "merino long sleeve base layer",
+            "zalando":   "Icebreaker long sleeve",
         },
     },
     {
@@ -33,8 +33,10 @@ ITEMS = [
         "note": "Patagonia or Macpac",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "Patagonia fleece jacket",
-            "amazon":   "Patagonia fleece jacket men",
+            "decathlon": "fleece hiking jacket",
+            "amazon":    "Patagonia fleece jacket",
+            "wiggle":    "fleece jacket outdoor",
+            "zalando":   "Patagonia fleece jacket",
         },
     },
     {
@@ -43,8 +45,10 @@ ITEMS = [
         "note": "Non-negotiable for NZ weather",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "hardshell waterproof rain jacket hiking",
-            "amazon":   "hardshell waterproof jacket hiking men",
+            "decathlon": "hardshell waterproof jacket",
+            "amazon":    "hardshell waterproof jacket hiking",
+            "wiggle":    "hardshell jacket waterproof",
+            "zalando":   "hardshell rain jacket",
         },
     },
     {
@@ -53,8 +57,9 @@ ITEMS = [
         "note": "Synthetic — no jeans",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "idealo":   "quick dry hiking trousers",
-            "amazon":   "quick dry hiking trousers men",
+            "decathlon": "hiking trousers quick dry",
+            "amazon":    "quick dry hiking trousers",
+            "wiggle":    "hiking trousers quick dry",
         },
     },
     {
@@ -63,7 +68,8 @@ ITEMS = [
         "note": "For town days",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "slim fit chino trousers men",
+            "amazon":  "men chino trousers casual",
+            "zalando": "slim fit chinos men",
         },
     },
     {
@@ -72,8 +78,9 @@ ITEMS = [
         "note": "Merino if possible",
         "priority": "critical", "category": "Clothing", "qty": 10,
         "retailers": {
-            "idealo":   "Icebreaker merino underwear",
-            "amazon":   "merino wool underwear men",
+            "decathlon": "merino underwear",
+            "amazon":    "merino wool underwear",
+            "wiggle":    "merino underwear",
         },
     },
     {
@@ -82,8 +89,10 @@ ITEMS = [
         "note": "SmartWool or Darn Tough",
         "priority": "critical", "category": "Clothing", "qty": 10,
         "retailers": {
-            "idealo":   "SmartWool hiking socks merino",
-            "amazon":   "SmartWool hiking socks",
+            "decathlon": "merino hiking socks",
+            "amazon":    "SmartWool hiking socks",
+            "wiggle":    "SmartWool hiking socks",
+            "zalando":   "SmartWool socks",
         },
     },
     {
@@ -92,8 +101,9 @@ ITEMS = [
         "note": "Essential for South Island winter",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "thermal base layer set top bottom",
-            "amazon":   "thermal base layer set men",
+            "decathlon": "thermal base layer set",
+            "amazon":    "thermal base layer set men",
+            "wiggle":    "thermal base layer set",
         },
     },
     {
@@ -102,8 +112,9 @@ ITEMS = [
         "note": "Merino ideal",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "merino wool beanie hat",
-            "amazon":   "merino wool beanie",
+            "decathlon": "merino wool beanie",
+            "amazon":    "merino wool beanie hat",
+            "zalando":   "merino beanie",
         },
     },
     {
@@ -111,8 +122,9 @@ ITEMS = [
         "name": "Lightweight merino liner gloves",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "merino liner gloves thin",
-            "amazon":   "merino liner gloves",
+            "decathlon": "liner gloves merino",
+            "amazon":    "merino liner gloves",
+            "wiggle":    "merino liner gloves",
         },
     },
     {
@@ -121,7 +133,9 @@ ITEMS = [
         "note": "You'll swim almost every day",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "idealo":   "quick dry swim shorts",
+            "decathlon": "swimwear swimming shorts",
+            "amazon":    "quick dry swimwear",
+            "zalando":   "swimwear",
         },
     },
     {
@@ -130,7 +144,9 @@ ITEMS = [
         "note": "Campsite showers and beach",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "flip flops sandals men",
+            "decathlon": "flip flops",
+            "amazon":    "flip flops sandals",
+            "zalando":   "flip flops",
         },
     },
     {
@@ -139,8 +155,10 @@ ITEMS = [
         "note": "Compact — for cold mornings",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "idealo":   "packable down jacket lightweight",
-            "amazon":   "packable down jacket men",
+            "decathlon": "packable down jacket",
+            "amazon":    "packable down jacket lightweight",
+            "wiggle":    "packable down jacket",
+            "zalando":   "packable down jacket",
         },
     },
     # ── FOOTWEAR ────────────────────────────────────────────────────────────
@@ -150,8 +168,10 @@ ITEMS = [
         "note": "Salomon, Scarpa, or Merrell — break in before trip",
         "priority": "critical", "category": "Footwear", "qty": 1,
         "retailers": {
-            "idealo":   "Salomon waterproof hiking boots",
-            "amazon":   "Salomon waterproof hiking boots men",
+            "decathlon": "waterproof hiking boots",
+            "amazon":    "Salomon waterproof hiking boots",
+            "wiggle":    "waterproof hiking boots Salomon",
+            "zalando":   "Salomon hiking boots waterproof",
         },
     },
     {
@@ -160,8 +180,10 @@ ITEMS = [
         "note": "Salomon or Merrell",
         "priority": "high", "category": "Footwear", "qty": 1,
         "retailers": {
-            "idealo":   "Salomon trail running shoes",
-            "amazon":   "Salomon trail running shoes men",
+            "decathlon": "trail running shoes",
+            "amazon":    "Salomon trail running shoes",
+            "wiggle":    "trail running shoes Salomon",
+            "zalando":   "Salomon trail shoes",
         },
     },
     {
@@ -170,8 +192,8 @@ ITEMS = [
         "note": "After-hike comfort",
         "priority": "high", "category": "Footwear", "qty": 1,
         "retailers": {
-            "idealo":   "Teva sandals",
-            "amazon":   "Teva sandals men",
+            "amazon":  "Teva sandals",
+            "zalando": "Teva sandals",
         },
     },
     # ── HIKING & OUTDOORS ───────────────────────────────────────────────────
@@ -181,8 +203,9 @@ ITEMS = [
         "note": "Separate from main luggage bag",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "daypack 25L hiking backpack",
-            "amazon":   "daypack 25L hiking backpack",
+            "decathlon": "daypack 25L hiking",
+            "amazon":    "daypack 25L hiking backpack",
+            "wiggle":    "daypack 25L",
         },
     },
     {
@@ -191,8 +214,9 @@ ITEMS = [
         "note": "Essential for steep NZ descents",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "collapsible trekking poles aluminium",
-            "amazon":   "collapsible trekking poles hiking",
+            "decathlon": "collapsible trekking poles",
+            "amazon":    "collapsible trekking poles hiking",
+            "wiggle":    "trekking poles collapsible",
         },
     },
     {
@@ -201,8 +225,9 @@ ITEMS = [
         "note": "Night hikes and 3am toilet trips",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "USB rechargeable headlamp hiking",
-            "amazon":   "USB rechargeable headlamp",
+            "decathlon": "USB rechargeable headlamp",
+            "amazon":    "USB rechargeable headlamp hiking",
+            "wiggle":    "rechargeable headlamp",
         },
     },
     {
@@ -211,8 +236,9 @@ ITEMS = [
         "note": "Mandatory for NZ alpine tracks",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "emergency bivvy bag foil survival",
-            "amazon":   "emergency bivvy bag survival foil",
+            "decathlon": "emergency bivvy bag survival",
+            "amazon":    "emergency bivvy bag foil survival",
+            "wiggle":    "emergency bivvy",
         },
     },
     {
@@ -221,8 +247,8 @@ ITEMS = [
         "note": "Blister kit, antiseptic, bandages",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "hiking first aid kit comprehensive",
-            "amazon":   "hiking first aid kit",
+            "decathlon": "hiking first aid kit",
+            "amazon":    "hiking first aid kit comprehensive",
         },
     },
     {
@@ -231,8 +257,8 @@ ITEMS = [
         "note": "NZ has one of the world's highest UV indices",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 2,
         "retailers": {
-            "idealo":   "sunscreen SPF 50 sport water resistant",
-            "amazon":   "sunscreen SPF 50 sport",
+            "amazon": "sunscreen SPF 50 sport water resistant",
+            "bol":    "sunscreen SPF 50 sport",
         },
     },
     {
@@ -241,8 +267,9 @@ ITEMS = [
         "note": "Glacier and snow reflection",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "polarised sunglasses UV400 hiking",
-            "amazon":   "polarised sunglasses UV400",
+            "decathlon": "polarised sunglasses UV400 hiking",
+            "amazon":    "polarised sunglasses UV400",
+            "zalando":   "polarised sunglasses",
         },
     },
     {
@@ -251,8 +278,9 @@ ITEMS = [
         "note": "Sun protection and warmth",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "Buff neck gaiter multifunctional",
-            "amazon":   "Buff neck gaiter",
+            "decathlon": "buff neck gaiter",
+            "amazon":    "Buff neck gaiter multifunctional",
+            "wiggle":    "Buff neck gaiter",
         },
     },
     {
@@ -261,8 +289,9 @@ ITEMS = [
         "note": "Also works as emergency hot-water bottle",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "Nalgene 1L wide mouth water bottle",
-            "amazon":   "Nalgene 1L wide mouth",
+            "decathlon": "1L wide mouth water bottle",
+            "amazon":    "Nalgene 1L wide mouth",
+            "wiggle":    "Nalgene wide mouth 1L",
         },
     },
     {
@@ -271,8 +300,8 @@ ITEMS = [
         "note": "Drink from any NZ stream safely",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "Sawyer Squeeze water filter",
-            "amazon":   "Sawyer Squeeze water filter",
+            "amazon": "Sawyer Squeeze water filter",
+            "wiggle": "Sawyer Squeeze water filter",
         },
     },
     {
@@ -281,8 +310,9 @@ ITEMS = [
         "note": "Waterproof bags for electronics and clothes",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "waterproof dry bags set",
-            "amazon":   "waterproof dry bags set 3 sizes",
+            "decathlon": "dry bag set waterproof",
+            "amazon":    "waterproof dry bags set 3 sizes",
+            "wiggle":    "dry bag set",
         },
     },
     {
@@ -291,8 +321,9 @@ ITEMS = [
         "note": "For exposed mountain tracks",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "packable waterproof rain trousers hiking",
-            "amazon":   "packable waterproof rain trousers",
+            "decathlon": "packable waterproof trousers hiking",
+            "amazon":    "packable waterproof rain trousers",
+            "wiggle":    "waterproof trousers hiking packable",
         },
     },
     {
@@ -301,8 +332,9 @@ ITEMS = [
         "note": "For muddy NZ tracks",
         "priority": "normal", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "idealo":   "trail gaiters low hiking",
-            "amazon":   "low trail gaiters",
+            "decathlon": "trail gaiters low",
+            "amazon":    "trail gaiters low hiking",
+            "wiggle":    "trail gaiters",
         },
     },
     {
@@ -311,8 +343,8 @@ ITEMS = [
         "note": "West Coast sandflies are vicious — non-negotiable",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 2,
         "retailers": {
-            "idealo":   "DEET insect repellent 50%",
-            "amazon":   "DEET insect repellent 50%",
+            "amazon": "DEET insect repellent 50%",
+            "bol":    "DEET insect repellent",
         },
     },
     # ── ELECTRONICS ─────────────────────────────────────────────────────────
@@ -322,8 +354,8 @@ ITEMS = [
         "note": "Keep fully charged always",
         "priority": "critical", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "20000mAh power bank USB-C",
-            "amazon":   "20000mAh power bank USB-C fast charge",
+            "amazon": "20000mAh power bank USB-C fast charge",
+            "bol":    "20000mAh powerbank USB-C",
         },
     },
     {
@@ -332,8 +364,8 @@ ITEMS = [
         "note": "Charges devices while driving",
         "priority": "critical", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "12V USB-C car charger",
-            "amazon":   "12V USB-C car charger fast charge",
+            "amazon": "12V USB-C car charger fast charge",
+            "bol":    "12V USB car charger USB-C",
         },
     },
     {
@@ -342,8 +374,8 @@ ITEMS = [
         "note": "NZ uses Type I plugs — 230V",
         "priority": "critical", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "universal travel adaptor Australia New Zealand",
-            "amazon":   "universal travel adaptor Type I Australia",
+            "amazon": "universal travel adaptor Australia New Zealand Type I",
+            "bol":    "universal travel adaptor Type I",
         },
     },
     {
@@ -352,8 +384,8 @@ ITEMS = [
         "note": "For van leisure battery",
         "priority": "high", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "portable foldable solar panel 100W",
-            "amazon":   "portable solar panel 100W foldable",
+            "amazon": "portable solar panel 100W foldable",
+            "bol":    "portable solar panel 100W foldable",
         },
     },
     {
@@ -362,8 +394,8 @@ ITEMS = [
         "note": "JBL Flip or similar",
         "priority": "high", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "JBL Flip 6 waterproof Bluetooth speaker",
-            "amazon":   "JBL Flip 6 Bluetooth speaker",
+            "amazon": "JBL Flip 6 waterproof Bluetooth speaker",
+            "bol":    "JBL Flip Bluetooth speaker",
         },
     },
     {
@@ -372,8 +404,8 @@ ITEMS = [
         "note": "Rain days and hut evenings",
         "priority": "high", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "Kindle Paperwhite",
-            "amazon":   "Kindle Paperwhite",
+            "amazon": "Kindle Paperwhite e-reader",
+            "bol":    "Kindle Paperwhite",
         },
     },
     {
@@ -382,8 +414,8 @@ ITEMS = [
         "note": "Two-way messaging when off-grid — Great Walks",
         "priority": "normal", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "Garmin inReach Mini 2",
-            "amazon":   "Garmin inReach Mini 2 satellite communicator",
+            "amazon": "Garmin inReach Mini 2 satellite communicator",
+            "wiggle": "Garmin inReach Mini",
         },
     },
     {
@@ -392,8 +424,9 @@ ITEMS = [
         "note": "Long drives and hostel nights",
         "priority": "high", "category": "Electronics", "qty": 1,
         "retailers": {
-            "idealo":   "noise cancelling headphones wireless",
-            "amazon":   "noise cancelling headphones wireless",
+            "amazon":  "noise cancelling headphones wireless",
+            "bol":     "noise cancelling headphones wireless",
+            "zalando": "noise cancelling headphones",
         },
     },
     # ── TOILETRIES & HEALTH ─────────────────────────────────────────────────
@@ -403,8 +436,9 @@ ITEMS = [
         "note": "Dries in 20 min",
         "priority": "critical", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "idealo":   "microfibre travel towel large XL",
-            "amazon":   "microfibre travel towel XL",
+            "decathlon": "microfibre travel towel large",
+            "amazon":    "microfibre travel towel XL",
+            "wiggle":    "microfibre travel towel",
         },
     },
     {
@@ -413,8 +447,8 @@ ITEMS = [
         "note": "Body wash + shampoo + laundry + dishes",
         "priority": "critical", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "idealo":   "Dr Bronner castile soap 500ml",
-            "amazon":   "Dr Bronner castile soap 500ml",
+            "amazon": "Dr Bronner castile soap 500ml",
+            "bol":    "Dr Bronner castile soap",
         },
     },
     {
@@ -423,8 +457,8 @@ ITEMS = [
         "note": "Required for DOC campsites",
         "priority": "critical", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "idealo":   "Ecover biodegradable washing up liquid",
-            "amazon":   "Ecover biodegradable soap",
+            "amazon": "Ecover biodegradable washing up liquid",
+            "bol":    "Ecover biodegradable soap",
         },
     },
     {
@@ -433,8 +467,8 @@ ITEMS = [
         "note": "NZ UV intense even on cloudy days",
         "priority": "critical", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "idealo":   "face moisturiser SPF 50 daily",
-            "amazon":   "SPF 50 daily face moisturiser",
+            "amazon": "SPF 50 daily face moisturiser",
+            "bol":    "face moisturiser SPF 50",
         },
     },
     {
@@ -443,8 +477,8 @@ ITEMS = [
         "note": "Wind, campsite noise, snoring neighbours",
         "priority": "high", "category": "Toiletries & Health", "qty": 1,
         "retailers": {
-            "idealo":   "foam earplugs box 50 pairs",
-            "amazon":   "foam earplugs box 50 pairs NRR",
+            "amazon": "foam earplugs box 50 pairs NRR",
+            "bol":    "foam earplugs 50 pairs",
         },
     },
     {
@@ -453,8 +487,8 @@ ITEMS = [
         "note": "NZ summer evenings still bright at 9:30pm",
         "priority": "high", "category": "Toiletries & Health", "qty": 1,
         "retailers": {
-            "idealo":   "sleep eye mask contoured",
-            "amazon":   "sleep eye mask",
+            "amazon": "sleep eye mask contoured",
+            "bol":    "sleep eye mask",
         },
     },
     {
@@ -463,8 +497,8 @@ ITEMS = [
         "note": "West Coast sandfly bites are intense",
         "priority": "high", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "idealo":   "hydrocortisone cream 1% bite relief",
-            "amazon":   "hydrocortisone cream 1%",
+            "amazon": "hydrocortisone cream 1%",
+            "bol":    "hydrocortisone cream bite relief",
         },
     },
     # ── MISCELLANEOUS ───────────────────────────────────────────────────────
@@ -474,8 +508,8 @@ ITEMS = [
         "note": "Van security and hostel lockers",
         "priority": "high", "category": "Miscellaneous", "qty": 2,
         "retailers": {
-            "idealo":   "TSA combination padlock",
-            "amazon":   "TSA combination padlock",
+            "amazon": "TSA combination padlock",
+            "bol":    "TSA padlock combination",
         },
     },
     {
@@ -484,8 +518,8 @@ ITEMS = [
         "note": "Keep dirty and clean separated",
         "priority": "high", "category": "Miscellaneous", "qty": 2,
         "retailers": {
-            "idealo":   "mesh laundry bag set",
-            "amazon":   "mesh laundry bag",
+            "amazon": "mesh laundry bag set",
+            "bol":    "mesh laundry bag",
         },
     },
     {
@@ -494,8 +528,8 @@ ITEMS = [
         "note": "Field repairs on gear",
         "priority": "normal", "category": "Miscellaneous", "qty": 1,
         "retailers": {
-            "idealo":   "travel sewing kit compact",
-            "amazon":   "travel sewing kit",
+            "amazon": "travel sewing kit compact",
+            "bol":    "travel sewing kit",
         },
     },
     {
@@ -504,13 +538,16 @@ ITEMS = [
         "note": "Supermarket shopping and farmers markets",
         "priority": "normal", "category": "Miscellaneous", "qty": 1,
         "retailers": {
-            "idealo":   "packable foldable tote bag",
-            "amazon":   "packable tote bag foldable",
+            "amazon": "packable tote bag foldable",
+            "bol":    "packable tote bag",
         },
     },
 ]
 
 RETAILER_NAMES = {
-    "idealo": "Idealo.be",
-    "amazon": "Amazon.de",
+    "decathlon": "Decathlon.be",
+    "amazon":    "Amazon.de",
+    "wiggle":    "Wiggle.com",
+    "zalando":   "Zalando.be",
+    "bol":       "Bol.com",
 }
