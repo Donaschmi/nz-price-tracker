@@ -9,7 +9,6 @@ ITEMS = [
         "note": "Icebreaker, Macpac, or Kathmandu",
         "priority": "critical", "category": "Clothing", "qty": 3,
         "retailers": {
-            "decathlon": "merino t-shirt",
             "amazon":    "Icebreaker merino wool t-shirt",
             "wiggle":    "Icebreaker merino t-shirt",
             "zalando":   "Icebreaker merino shirt",
@@ -21,7 +20,6 @@ ITEMS = [
         "note": "Base layer + mid-layer",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "decathlon": "merino long sleeve top",
             "amazon":    "Icebreaker merino long sleeve",
             "wiggle":    "merino long sleeve base layer",
             "zalando":   "Icebreaker long sleeve",
@@ -33,7 +31,6 @@ ITEMS = [
         "note": "Patagonia or Macpac",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "fleece hiking jacket",
             "amazon":    "Patagonia fleece jacket",
             "wiggle":    "fleece jacket outdoor",
             "zalando":   "Patagonia fleece jacket",
@@ -45,7 +42,6 @@ ITEMS = [
         "note": "Non-negotiable for NZ weather",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "hardshell waterproof jacket",
             "amazon":    "hardshell waterproof jacket hiking",
             "wiggle":    "hardshell jacket waterproof",
             "zalando":   "hardshell rain jacket",
@@ -57,7 +53,6 @@ ITEMS = [
         "note": "Synthetic — no jeans",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "decathlon": "hiking trousers quick dry",
             "amazon":    "quick dry hiking trousers",
             "wiggle":    "hiking trousers quick dry",
         },
@@ -78,7 +73,6 @@ ITEMS = [
         "note": "Merino if possible",
         "priority": "critical", "category": "Clothing", "qty": 10,
         "retailers": {
-            "decathlon": "merino underwear",
             "amazon":    "merino wool underwear",
             "wiggle":    "merino underwear",
         },
@@ -89,7 +83,6 @@ ITEMS = [
         "note": "SmartWool or Darn Tough",
         "priority": "critical", "category": "Clothing", "qty": 10,
         "retailers": {
-            "decathlon": "merino hiking socks",
             "amazon":    "SmartWool hiking socks",
             "wiggle":    "SmartWool hiking socks",
             "zalando":   "SmartWool socks",
@@ -101,7 +94,6 @@ ITEMS = [
         "note": "Essential for South Island winter",
         "priority": "critical", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "thermal base layer set",
             "amazon":    "thermal base layer set men",
             "wiggle":    "thermal base layer set",
         },
@@ -112,7 +104,6 @@ ITEMS = [
         "note": "Merino ideal",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "merino wool beanie",
             "amazon":    "merino wool beanie hat",
             "zalando":   "merino beanie",
         },
@@ -122,7 +113,6 @@ ITEMS = [
         "name": "Lightweight merino liner gloves",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "liner gloves merino",
             "amazon":    "merino liner gloves",
             "wiggle":    "merino liner gloves",
         },
@@ -133,7 +123,6 @@ ITEMS = [
         "note": "You'll swim almost every day",
         "priority": "critical", "category": "Clothing", "qty": 2,
         "retailers": {
-            "decathlon": "swimwear swimming shorts",
             "amazon":    "quick dry swimwear",
             "zalando":   "swimwear",
         },
@@ -144,7 +133,6 @@ ITEMS = [
         "note": "Campsite showers and beach",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "flip flops",
             "amazon":    "flip flops sandals",
             "zalando":   "flip flops",
         },
@@ -155,7 +143,6 @@ ITEMS = [
         "note": "Compact — for cold mornings",
         "priority": "high", "category": "Clothing", "qty": 1,
         "retailers": {
-            "decathlon": "packable down jacket",
             "amazon":    "packable down jacket lightweight",
             "wiggle":    "packable down jacket",
             "zalando":   "packable down jacket",
@@ -168,7 +155,6 @@ ITEMS = [
         "note": "Salomon, Scarpa, or Merrell — break in before trip",
         "priority": "critical", "category": "Footwear", "qty": 1,
         "retailers": {
-            "decathlon": "waterproof hiking boots",
             "amazon":    "Salomon waterproof hiking boots",
             "wiggle":    "waterproof hiking boots Salomon",
             "zalando":   "Salomon hiking boots waterproof",
@@ -180,7 +166,6 @@ ITEMS = [
         "note": "Salomon or Merrell",
         "priority": "high", "category": "Footwear", "qty": 1,
         "retailers": {
-            "decathlon": "trail running shoes",
             "amazon":    "Salomon trail running shoes",
             "wiggle":    "trail running shoes Salomon",
             "zalando":   "Salomon trail shoes",
@@ -203,7 +188,6 @@ ITEMS = [
         "note": "Separate from main luggage bag",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "daypack 25L hiking",
             "amazon":    "daypack 25L hiking backpack",
             "wiggle":    "daypack 25L",
         },
@@ -214,7 +198,6 @@ ITEMS = [
         "note": "Essential for steep NZ descents",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "collapsible trekking poles",
             "amazon":    "collapsible trekking poles hiking",
             "wiggle":    "trekking poles collapsible",
         },
@@ -225,7 +208,6 @@ ITEMS = [
         "note": "Night hikes and 3am toilet trips",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "USB rechargeable headlamp",
             "amazon":    "USB rechargeable headlamp hiking",
             "wiggle":    "rechargeable headlamp",
         },
@@ -236,7 +218,6 @@ ITEMS = [
         "note": "Mandatory for NZ alpine tracks",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "emergency bivvy bag survival",
             "amazon":    "emergency bivvy bag foil survival",
             "wiggle":    "emergency bivvy",
         },
@@ -247,7 +228,6 @@ ITEMS = [
         "note": "Blister kit, antiseptic, bandages",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "hiking first aid kit",
             "amazon":    "hiking first aid kit comprehensive",
         },
     },
@@ -267,7 +247,6 @@ ITEMS = [
         "note": "Glacier and snow reflection",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "polarised sunglasses UV400 hiking",
             "amazon":    "polarised sunglasses UV400",
             "zalando":   "polarised sunglasses",
         },
@@ -278,7 +257,6 @@ ITEMS = [
         "note": "Sun protection and warmth",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "buff neck gaiter",
             "amazon":    "Buff neck gaiter multifunctional",
             "wiggle":    "Buff neck gaiter",
         },
@@ -289,7 +267,6 @@ ITEMS = [
         "note": "Also works as emergency hot-water bottle",
         "priority": "critical", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "1L wide mouth water bottle",
             "amazon":    "Nalgene 1L wide mouth",
             "wiggle":    "Nalgene wide mouth 1L",
         },
@@ -310,7 +287,6 @@ ITEMS = [
         "note": "Waterproof bags for electronics and clothes",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "dry bag set waterproof",
             "amazon":    "waterproof dry bags set 3 sizes",
             "wiggle":    "dry bag set",
         },
@@ -321,7 +297,6 @@ ITEMS = [
         "note": "For exposed mountain tracks",
         "priority": "high", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "packable waterproof trousers hiking",
             "amazon":    "packable waterproof rain trousers",
             "wiggle":    "waterproof trousers hiking packable",
         },
@@ -332,7 +307,6 @@ ITEMS = [
         "note": "For muddy NZ tracks",
         "priority": "normal", "category": "Hiking & Outdoors", "qty": 1,
         "retailers": {
-            "decathlon": "trail gaiters low",
             "amazon":    "trail gaiters low hiking",
             "wiggle":    "trail gaiters",
         },
@@ -436,7 +410,6 @@ ITEMS = [
         "note": "Dries in 20 min",
         "priority": "critical", "category": "Toiletries & Health", "qty": 2,
         "retailers": {
-            "decathlon": "microfibre travel towel large",
             "amazon":    "microfibre travel towel XL",
             "wiggle":    "microfibre travel towel",
         },
@@ -545,7 +518,6 @@ ITEMS = [
 ]
 
 RETAILER_NAMES = {
-    "decathlon": "Decathlon.be",
     "amazon":    "Amazon.de",
     "wiggle":    "Wiggle.com",
     "zalando":   "Zalando.be",
